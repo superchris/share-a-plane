@@ -1,0 +1,68 @@
+<%= form_for(@buying_group) do |f| %>
+  <% if @buying_group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@buying_group.errors.count, "error") %> prohibited this buying_group from being saved:</h2>
+
+      <ul>
+      <% @buying_group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :home_airport %><br>
+    <%= f.text_field :home_airport %>
+  </div>
+  <div class="field">
+    <%= f.label :aircraft_type %><br>
+    <%= f.text_field :aircraft_type %>
+  </div>
+  <div class="field">
+    <%= f.label :initial_cost %><br>
+    <%= f.number_field :cost %>
+  </div>
+  <div class="field">
+    <%= f.label :engine_time %><br>
+    <%= f.number_field :engine_time %>
+  </div>
+  <div class="field">
+    <%= f.label :tboh %><br>
+    <%= f.number_field :tboh %>
+  </div>
+  <div class="field">
+    <%= f.label :overhaul_cost %><br>
+    <%= f.number_field :overhaul_cost %>
+  </div>
+  <div class="field">
+    <%= f.label :hangar_fee %><br>
+    <%= f.number_field :hangar_fee %>
+  </div>
+  <div class="field">
+    <%= f.label :annual_insurance_cost %><br>
+    <%= f.number_field :annual_insurance_cost %>
+  </div>
+  <div class="field">
+    <%= f.label :annual_inspection_cost %><br>
+    <%= f.number_field :annual_inspection_cost %>
+  </div>
+  <div class="field">
+    <%= f.label :max_members %><br>
+    <%= f.number_field :max_members %>
+  </div>
+  <div class="field">
+    <%= f.label :price_per_gallon %><br>
+    <%= f.number_field :price_per_gallon %>
+  </div>
+  <div class="field">
+    <%= f.label :gallons_per_hour %><br>
+    <%= f.number_field :gallons_per_hour %>
+  </div>
+  <div class="field">
+    <%= f.label :hourly_maintenance_reserve %><br>
+    <%= f.number_field :hourly_maintenance_reserve %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

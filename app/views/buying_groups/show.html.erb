@@ -1,0 +1,19 @@
+With <%= @buying_group.max_members %> members,
+
+<p>
+  <strong>Initial per member investment:</strong>
+  <%= @buying_group.initial_investment %>
+</p>
+
+<p>
+  <strong>Monthly cost:</strong>
+  <%= @buying_group.fixed_monthly %>
+</p>
+
+<p>
+  <strong>Hourly rate:</strong>
+  <%= @buying_group.hourly_rate %>
+</p>
+
+<%= link_to 'Edit', edit_buying_group_path(@buying_group) %> |
+<%= link_to 'Back', buying_groups_path %>

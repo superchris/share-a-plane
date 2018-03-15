@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @airport.code %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @airport.description %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @airport.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @airport.longitude %>
+</p>
+
+<%= link_to 'Edit', edit_airport_path(@airport) %> |
+<%= link_to 'Back', airports_path %>
