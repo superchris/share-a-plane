@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180315014233) do
+ActiveRecord::Schema.define(version: 20180317171614) do
 
   create_table "airports", force: :cascade do |t|
     t.string   "code"
@@ -38,7 +38,10 @@ ActiveRecord::Schema.define(version: 20180315014233) do
     t.integer  "gallons_per_hour"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "created_by_id"
   end
+
+  add_index "buying_groups", ["created_by_id"], name: "index_buying_groups_on_created_by_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

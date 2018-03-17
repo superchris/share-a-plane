@@ -1,5 +1,7 @@
 class BuyingGroup < ActiveRecord::Base
 
+  belongs_to :created_by, class_name: "User" 
+
   def initial_investment
     cost / max_members
   end

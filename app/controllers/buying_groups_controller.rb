@@ -1,5 +1,6 @@
 class BuyingGroupsController < ApplicationController
   before_action :set_buying_group, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit]
 
   # GET /buying_groups
   # GET /buying_groups.json
@@ -25,6 +26,7 @@ class BuyingGroupsController < ApplicationController
   # POST /buying_groups.json
   def create
     @buying_group = BuyingGroup.new(buying_group_params)
+    @buying_group.created_by = current_user
 
     respond_to do |format|
       if @buying_group.save
