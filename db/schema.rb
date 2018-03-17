@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -13,52 +12,54 @@
 
 ActiveRecord::Schema.define(version: 20180317171614) do
 
-  create_table "airports", force: :cascade do |t|
-    t.string   "code"
-    t.string   "description"
-    t.string   "latitude"
-    t.string   "longitude"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "airports", id: :serial, force: :cascade do |t|
+    t.string "code"
+    t.string "description"
+    t.string "latitude"
+    t.string "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "buying_groups", force: :cascade do |t|
-    t.integer  "cost"
-    t.string   "aircraft_type"
-    t.integer  "engine_time"
-    t.integer  "tboh"
-    t.integer  "max_members"
-    t.integer  "hangar_fee"
-    t.integer  "annual_insurance_cost"
-    t.integer  "annual_inspection_cost"
-    t.string   "home_airport"
-    t.integer  "overhaul_cost"
-    t.integer  "hourly_maintenance_reserve"
-    t.float    "price_per_gallon"
-    t.integer  "gallons_per_hour"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "created_by_id"
+  create_table "buying_groups", id: :serial, force: :cascade do |t|
+    t.integer "cost"
+    t.string "aircraft_type"
+    t.integer "engine_time"
+    t.integer "tboh"
+    t.integer "max_members"
+    t.integer "hangar_fee"
+    t.integer "annual_insurance_cost"
+    t.integer "annual_inspection_cost"
+    t.string "home_airport"
+    t.integer "overhaul_cost"
+    t.integer "hourly_maintenance_reserve"
+    t.float "price_per_gallon"
+    t.integer "gallons_per_hour"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "created_by_id"
+    t.index ["created_by_id"], name: "index_buying_groups_on_created_by_id"
   end
 
-  add_index "buying_groups", ["created_by_id"], name: "index_buying_groups_on_created_by_id"
-
-  create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-
+  add_foreign_key "buying_groups", "users", column: "created_by_id"
 end
