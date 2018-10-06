@@ -11,6 +11,7 @@ class BuyingGroupsController < ApplicationController
   # GET /buying_groups/1
   # GET /buying_groups/1.json
   def show
+    @membership = Membership.new
   end
 
   # GET /buying_groups/new
@@ -20,6 +21,7 @@ class BuyingGroupsController < ApplicationController
 
   # GET /buying_groups/1/edit
   def edit
+    @buying_group.home_airport = @buying_group.airport.code
   end
 
   # POST /buying_groups

@@ -15,5 +15,14 @@ With <%= @buying_group.max_members %> members,
   <%= @buying_group.hourly_rate %>
 </p>
 
+<% if user_signed_in? %>
+  <% unless @buying_group.memberships.exists?(user: current_user) %>
+    <%= form_for [@buying_group, @membership] do |f| %>
+      <%= f.submit "Join this group" %>
+    <% end %>
+  <% else %>
+    You are a member of this group
+  <% end %>
+<% end %>
 <%= link_to 'Edit', edit_buying_group_path(@buying_group) %> |
 <%= link_to 'Back', buying_groups_path %>

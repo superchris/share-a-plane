@@ -10,21 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180317171614) do
+ActiveRecord::Schema.define(version: 20181003204129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "airports", id: :serial, force: :cascade do |t|
+  create_table "airports", force: :cascade do |t|
     t.string "code"
     t.string "description"
-    t.string "latitude"
-    t.string "longitude"
+    t.decimal "latitude"
+    t.decimal "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "buying_groups", id: :serial, force: :cascade do |t|
+  create_table "buying_groups", force: :cascade do |t|
     t.integer "cost"
     t.string "aircraft_type"
     t.integer "engine_time"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20180317171614) do
     t.integer "hangar_fee"
     t.integer "annual_insurance_cost"
     t.integer "annual_inspection_cost"
-    t.string "home_airport"
     t.integer "overhaul_cost"
     t.integer "hourly_maintenance_reserve"
     t.float "price_per_gallon"
@@ -41,10 +40,21 @@ ActiveRecord::Schema.define(version: 20180317171614) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "created_by_id"
+    t.bigint "airport_id"
+    t.index ["airport_id"], name: "index_buying_groups_on_airport_id"
     t.index ["created_by_id"], name: "index_buying_groups_on_created_by_id"
   end
 
-  create_table "users", id: :serial, force: :cascade do |t|
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "buying_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buying_group_id"], name: "index_memberships_on_buying_group_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -62,4 +72,6 @@ ActiveRecord::Schema.define(version: 20180317171614) do
   end
 
   add_foreign_key "buying_groups", "users", column: "created_by_id"
+  add_foreign_key "memberships", "buying_groups"
+  add_foreign_key "memberships", "users"
 end

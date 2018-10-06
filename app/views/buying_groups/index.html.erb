@@ -4,11 +4,8 @@
 <table>
   <thead>
     <tr>
-      <th>Cost</th>
+      <th>Airport</th>
       <th>Aircraft type</th>
-      <th>Engine time</th>
-      <th>Tboh</th>
-      <th>Hangar fee</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,11 +13,8 @@
   <tbody>
     <% @buying_groups.each do |buying_group| %>
       <tr>
-        <td><%= buying_group.cost %></td>
+        <td><%= buying_group.airport.description %></td>
         <td><%= buying_group.aircraft_type %></td>
-        <td><%= buying_group.engine_time %></td>
-        <td><%= buying_group.tboh %></td>
-        <td><%= buying_group.hangar_fee %></td>
         <td><%= link_to 'Show', buying_group %></td>
         <td><%= link_to 'Edit', edit_buying_group_path(buying_group) %></td>
         <td><%= link_to 'Destroy', buying_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>

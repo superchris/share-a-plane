@@ -16,3 +16,6 @@
 !/log/.keep
 /tmp
 db/APT.txt
+.env
+.byebug_history
+
