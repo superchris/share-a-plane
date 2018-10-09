@@ -6,7 +6,7 @@ class BuyingGroup < ActiveRecord::Base
   attr_accessor :home_airport
 
   acts_as_mappable through: :airport
-  
+
   validate :airport_exists
 
   validates :annual_inspection_cost, numericality: { greater_than: 0 }
@@ -50,6 +50,18 @@ class BuyingGroup < ActiveRecord::Base
 
   def assign_airport
     self.airport = Airport.find_by_code(home_airport_code)
+  end
+
+  def self.near_zipcode(zipcode)
+    joins(:airport).within(20, origin: zipcode)
+  end
+
+  def self.near_airport(airport_code)
+    if airport = Airport.find_by_code(airport_code.strip.upcase.gsub(/^K/, ""))
+      joins(:airport).within(20, origin: airport)
+    else
+      []
+    end
   end
 
 end

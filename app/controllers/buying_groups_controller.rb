@@ -5,7 +5,13 @@ class BuyingGroupsController < ApplicationController
   # GET /buying_groups
   # GET /buying_groups.json
   def index
-    @buying_groups = BuyingGroup.all
+    if params[:zipcode].present?
+      @buying_groups = BuyingGroup.near_zipcode(params[:zipcode])
+    elsif params[:airport_code].present?
+      @buying_groups = BuyingGroup.near_airport(params[:airport_code])
+    else
+      @buying_groups = BuyingGroup.all
+    end
   end
 
   # GET /buying_groups/1

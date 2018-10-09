@@ -24,5 +24,16 @@ With <%= @buying_group.max_members %> members,
     You are a member of this group
   <% end %>
 <% end %>
+
+<% unless @buying_group.memberships.empty? %>
+<p>
+  Members:
+  <ul>
+    <% @buying_group.memberships.each do |member| %>
+      <li><%= member.user.email %></li>
+    <% end %>
+  </ul>
+</p>
+<% end %>
 <%= link_to 'Edit', edit_buying_group_path(@buying_group) %> |
 <%= link_to 'Back', buying_groups_path %>
